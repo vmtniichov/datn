@@ -25,8 +25,8 @@ services:
       context: ./backend/
       dockerfile: config_files/backend.dockerfile
     volumes:
-      - ./backend/app:/backend/app
-    command:  /backend/app/prestart.sh
+      - ./backend/app:/app
+    command:  /start-reload.sh
     env_file:
       - /backend/.env
     ports:
