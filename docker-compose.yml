@@ -21,18 +21,21 @@ services:
     
 
   backend:
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./backend/app:/app
+    env_file:
+      - ./backend/.env
+    environment:
+      - PORT=8000
     build:
       context: ./backend/
       dockerfile: config_files/backend.dockerfile
-    volumes:
-      - ./backend/app:/backend/app
-    command:  /backend/app/prestart.sh
-    env_file:
-      - /backend/.env
-    ports:
-      - 8000:8000
     depends_on:
       - db
-      
+    command: /start-reload.sh
+
+
 volumes:
   postgres_data:
