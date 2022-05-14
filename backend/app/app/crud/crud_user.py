@@ -10,13 +10,14 @@ class CRUDUser(CRUDBase[User, UserCreate, UserUpdate]):
     def get_by_email(self, db: Session, *, email: str):
         return db.query(User).filter(User.email == email).first()
 
-    def create(self, db: Session, *, obj_in: UserCreate) -> User:
+    def create(self, db: Session, *, obj_in: UserCreate, super_user: bool = False) -> User:
         db_obj = User(
-            student_id=obj_in.student_id,
-            email=obj_in.email,
-            hashed_password=get_password_hash(obj_in.password),
-            full_name=obj_in.full_name,
-            is_active=obj_in.is_active
+            student_id=obj_in.student_id,  # type: ignore
+            email=obj_in.email,   # type: ignore
+            hashed_password=get_password_hash(obj_in.password),    # type: ignore
+            full_name=obj_in.full_name,    # type: ignore
+            is_active=obj_in.is_active,  # type: ignore
+            is_superuser=super_user  # type: ignore
         )
         db.add(db_obj)
         db.commit()

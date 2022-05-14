@@ -21,6 +21,7 @@ def get_subjects(
 
 @router.get("/details/", response_model=schemas.Subject)
 def get_subject(
+        id: str,
         db: Session = Depends(deps.get_db),
         _: models.User = Depends(deps.get_current_active_superuser)
 ):

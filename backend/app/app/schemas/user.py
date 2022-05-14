@@ -16,7 +16,7 @@ class UserCreate(UserBase):
 
 class UserUpdate(BaseModel):
     full_name: str
-    hashed_password: str
+    # hashed_password: str
 
 
 class User(BaseModel):
