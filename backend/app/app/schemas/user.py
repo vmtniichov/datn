@@ -16,7 +16,11 @@ class UserCreate(UserBase):
 
 class UserUpdate(BaseModel):
     full_name: str
-    # hashed_password: str
+
+
+class UserChangePassword(BaseModel):
+    old_password: str
+    new_password: str
 
 
 class User(BaseModel):

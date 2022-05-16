@@ -4,12 +4,12 @@ services:
   db:
     image: postgres:13-alpine
     env_file:
-      - /backend/.env
+      - ./backend/.env
     volumes:
       - postgres_data:/var/lib/postgresql/data/
     environment:
       - PGDATA=/var/lib/postgresql/data/pgdata
-  
+
   pgadmin:
     image: dpage/pgadmin4
     ports:
@@ -17,14 +17,14 @@ services:
     depends_on:
       - db
     env_file:
-      - /backend/.env
-    
+      - ./backend/.env
+
 
   backend:
     volumes:
       - /backend/app:/app
     env_file:
-      - /backend/.env
+      - ./backend/.env
     environment:
       - PORT=8000
     build:

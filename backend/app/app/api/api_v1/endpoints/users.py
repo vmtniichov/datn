@@ -26,7 +26,7 @@ def get_me(db: Session = Depends(deps.get_db),
 def get_user(
         id: str,
         db: Session = Depends(deps.get_db),
-        user=Depends(deps.get_current_active_superuser)):
+        _=Depends(deps.get_current_active_superuser)):
     return crud.user.get(db, id=id)
 
 
@@ -56,9 +56,19 @@ def update_user(
         obj_in: schemas.UserUpdate,
         current_user=Depends(deps.get_current_active_user)
 ) -> models.User:
-    word = crud.user.update(db, db_obj=current_user, obj_in=obj_in)
-    return word
+    user = crud.user.update(db, id=current_user.id, obj_in=obj_in)
+    return user
 
+
+@router.put("/change_password/", response_model=schemas.User)
+def change_password(
+        *,
+        db: Session = Depends(deps.get_db),
+        obj_in: schemas.UserChangePassword,
+        current_user=Depends(deps.get_current_active_user)
+) -> models.User:
+    user = crud.user.change_password(db, user=current_user, obj_in=obj_in)
+    return user
 
 @router.delete("/delete/", response_model=schemas.User)
 def delete_user(
