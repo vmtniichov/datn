@@ -8,3 +8,4 @@ class Sample(Base):
     id = Column(Integer, primary_key=True, autoincrement=True)
     text = Column(String, nullable=False)
     word_id = Column(Integer, ForeignKey("word.id"))
+    mean = Column(String, nullable=True)
