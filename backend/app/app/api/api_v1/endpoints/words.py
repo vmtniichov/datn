@@ -13,7 +13,7 @@ router = APIRouter()
 @router.get("/", response_model=List[schemas.Word])
 def get_words(
         db: Session = Depends(deps.get_db),
-      _: models.User = Depends(deps.get_current_active_user),
+        _: models.User = Depends(deps.get_current_active_user),
 ):
     words = crud.word.get_multi(db)
     return words
@@ -22,13 +22,13 @@ def get_words(
 @router.get("/details/", response_model=schemas.WordWithSample)
 def get_word(
         id: str, db: Session = Depends(deps.get_db),
-        _: models.User = Depends(deps.get_current_active_user),
+        user: models.User = Depends(deps.get_current_active_user),
 ):
-    word = crud.word.get(db, id=id)
+    word = crud.word.get(db, word_id=id, user_id=user.id)
     return word
 
 
-@router.post("/", response_model=schemas.Word)
+@router.post("/", response_model=schemas.WordWithSample)
 def create_word(
         *,
         db: Session = Depends(deps.get_db),
@@ -43,12 +43,12 @@ def create_word(
 @router.put("/", response_model=schemas.Word)
 def update_word(
         *,
-        id: int,
+        id: str,
         db: Session = Depends(deps.get_db),
         obj_in: schemas.WordUpdate,
         _: models.User = Depends(deps.get_current_active_superuser)
 ) -> models.Word:
-    db_obj = crud.word.get(db, id)
+    db_obj = crud.word.get_(db, id_=id)
     word = crud.word.update(db, db_obj=db_obj, obj_in=obj_in)
     return word
 
@@ -62,3 +62,25 @@ def delete_word(
 ) -> models.Word:
     word = crud.word.remove(db, id=id)
     return word
+
+
+@router.get("/learned_words/")
+def get_learned_words(
+        *,
+        db: Session = Depends(deps.get_db),
+        _max: int = 10,
+        user: models.User = Depends(deps.get_current_active_user)
+):
+    words = crud.word.get_learned_words(db, user_id=user.id, max=_max)
+    return words
+
+
+@router.get("/practice/")
+def practice_words(
+        *,
+        db: Session = Depends(deps.get_db),
+        _max: int = 10,
+        user: models.User = Depends(deps.get_current_active_user)
+):
+    words = crud.word.practice_words(db, user_id=user.id, max=_max)
+    return words

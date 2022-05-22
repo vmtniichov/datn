@@ -1,5 +1,7 @@
+import secrets
 from typing import Generator
 
+from fastapi.security import HTTPBasic, HTTPBasicCredentials
 from fastapi import Depends, HTTPException, status
 from fastapi.security import OAuth2PasswordBearer
 from jose import jwt
@@ -60,3 +62,16 @@ def get_current_active_superuser(
             status_code=400, detail="The user doesn't have enough privileges"
         )
     return current_user
+
+
+security_ = HTTPBasic()
+def verify_administrator(credentials: HTTPBasicCredentials = Depends(security_)):
+    correct_username = secrets.compare_digest(credentials.username, settings.FIRST_SUPERUSER)
+    correct_password = secrets.compare_digest(credentials.password, settings.FIRST_SUPERUSER_PASSWORD)
+    if not (correct_username and correct_password):
+        raise HTTPException(
+            status_code=status.HTTP_401_UNAUTHORIZED,
+            detail="Incorrect email or password",
+            headers={"WWW-Authenticate": "Basic"},
+        )
+    return credentials.username

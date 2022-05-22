@@ -1,0 +1,13 @@
+version: "3.3"
+services:
+  backend:
+      ports:
+        - "8000:8000"
+      volumes:
+        - ./backend/app:/app
+      build:
+        context: ./backend
+        dockerfile: config_files/backend.dockerfile
+      command: /start-reload.sh
+      depends_on:
+        - db

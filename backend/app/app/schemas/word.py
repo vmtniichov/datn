@@ -8,11 +8,14 @@ from .sample import Sample, SampleCreate
 class WordBase(BaseModel):
     word: str
     label: str
-    ipa: str
-    mean: str
-    cluster: str
-    source: str
-    subject_id: int
+    ipa: Optional[str] = None
+    mean: Optional[str] = None
+    cluster: Optional[str] = None
+    source: Optional[str] = None
+    lemma: Optional[str] = None
+    position: Optional[str] = None
+    frequency: Optional[str] = None
+    subject_id: Optional[int] = None
 
     class Config:
         arbitrary_types_allowed = True
@@ -23,13 +26,16 @@ class WordCreate(WordBase):
 
 
 class WordUpdate(BaseModel):
-    word: Optional[str]
-    label: Optional[str]
-    ipa: Optional[str]
-    mean: Optional[str]
-    cluster: Optional[str]
-    source: Optional[str]
-    subject_id: Optional[str]
+    word: Optional[str] = None
+    label: Optional[str] = None
+    ipa: Optional[str] = None
+    mean: Optional[str] = None
+    cluster: Optional[str] = None
+    source: Optional[str] = None
+    subject_id: Optional[str] = None
+    lemma: Optional[str] = None
+    frequency: Optional[str] = None
+    position: Optional[str] = None
 
 
 class Word(WordBase):
