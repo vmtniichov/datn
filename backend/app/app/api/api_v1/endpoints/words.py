@@ -68,10 +68,9 @@ def delete_word(
 def get_learned_words(
         *,
         db: Session = Depends(deps.get_db),
-        _max: int = 10,
         user: models.User = Depends(deps.get_current_active_user)
 ):
-    words = crud.word.get_learned_words(db, user_id=user.id, max=_max)
+    words = crud.word.get_learned_words(db, user_id=user.id)
     return words
 
 
