@@ -7,5 +7,6 @@ from .word import Word
 class Subject(Base):
     id = Column(Integer, primary_key=True, autoincrement=True)
     name = Column(String)
+    description = Column(String, nullable=True)
 
     words = relationship("Word", backref="subject")
