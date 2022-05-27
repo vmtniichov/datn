@@ -1,4 +1,3 @@
-import pydantic
 from pydantic import BaseModel
 from typing import List, Optional
 
@@ -11,6 +10,7 @@ class SampleBase(BaseModel):
 
 class SampleCreate(BaseModel):
     text: str
+    mean: Optional[str] = None
 
 
 class SampleUpdate(BaseModel):

@@ -4,6 +4,7 @@ from pydantic import BaseModel
 
 class SubjectBase(BaseModel):
     name: str
+    name: Optional[str] = None
 
 
 class SubjectCreate(SubjectBase):
