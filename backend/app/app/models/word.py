@@ -23,7 +23,7 @@ class Word(Base):
     lemma = Column(String)
     position = Column(String)
     source = Column(String)
-    subject_id = Column(Integer, ForeignKey("subject.id"), nullable=True)
+    subject_id = Column(String, ForeignKey("subject.id"), nullable=True)
 
     sample = relationship("Sample", backref="word", cascade="all, delete-orphan")
     learned_users = relationship("User", secondary="learnedword", backref="learned_words")

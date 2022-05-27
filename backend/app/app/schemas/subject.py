@@ -4,7 +4,7 @@ from pydantic import BaseModel
 
 class SubjectBase(BaseModel):
     name: str
-    name: Optional[str] = None
+    description: Optional[str] = None
 
 
 class SubjectCreate(SubjectBase):
@@ -16,7 +16,7 @@ class SubjectUpdate(SubjectBase):
 
 
 class Subject(SubjectBase):
-    id: int
+    id: str
 
     class Config:
         orm_mode = True
