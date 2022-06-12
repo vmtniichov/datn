@@ -27,3 +27,17 @@ class Word(Base):
 
     sample = relationship("Sample", backref="word", cascade="all, delete-orphan")
     learned_users = relationship("User", secondary="learnedword", backref="learned_words")
+
+
+class UserWord(Base):
+    id = Column(Integer, primary_key=True, autoincrement=True)
+    word = Column(String)
+    label = Column(String)
+    ipa = Column(String)
+    mean = Column(String)
+    cluster = Column(String)
+    frequency = Column(String)
+    lemma = Column(String)
+    position = Column(String)
+    source = Column(String)
+    note = Column(String)
