@@ -15,7 +15,7 @@ class WordBase(BaseModel):
     lemma: Optional[str] = None
     position: Optional[str] = None
     frequency: Optional[str] = None
-    subject_id: Optional[int] = None
+    subject_id: Optional[str] = None
 
     class Config:
         arbitrary_types_allowed = True
