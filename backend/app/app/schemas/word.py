@@ -50,3 +50,28 @@ class WordWithSample(Word):
 
     class Config:
         orm_mode = True
+
+
+class UserCustomWordBase(BaseModel):
+    word: str
+    label: str
+    ipa: Optional[str] = None
+    mean: Optional[str] = None
+    cluster: Optional[str] = None
+    source: Optional[str] = None
+    lemma: Optional[str] = None
+    position: Optional[str] = None
+    frequency: Optional[str] = None
+    note: Optional[str] = None
+
+class UserCustomWordCreate(UserCustomWordBase):
+    pass
+
+class UserCustomWordUpdate(UserCustomWordBase):
+    pass
+
+
+class UserCustomWord(UserCustomWordBase):
+    
+    class Config:
+        orm_mode = True
