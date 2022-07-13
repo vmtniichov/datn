@@ -6,6 +6,7 @@ from typing import List, Optional
 class SampleBase(BaseModel):
     text: str
     word_id: int
+    mean: Optional[str] = None
 
 
 class SampleCreate(BaseModel):
@@ -14,7 +15,8 @@ class SampleCreate(BaseModel):
 
 
 class SampleUpdate(BaseModel):
-    pass
+    text: str
+    mean: Optional[str] = None
 
 
 class Sample(SampleBase):

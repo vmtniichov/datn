@@ -72,6 +72,7 @@ class UserCustomWordUpdate(UserCustomWordBase):
 
 
 class UserCustomWord(UserCustomWordBase):
-    
+    id: int
+
     class Config:
         orm_mode = True

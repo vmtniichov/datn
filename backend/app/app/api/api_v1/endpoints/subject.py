@@ -43,7 +43,7 @@ def create_subject(
 @router.put("/", response_model=schemas.Subject)
 def update_subject(
         *,
-        id: int,
+        id: str,
         db: Session = Depends(deps.get_db),
         obj_in: schemas.SubjectUpdate,
         _: models.User = Depends(deps.get_current_active_superuser)
@@ -56,7 +56,7 @@ def update_subject(
 @router.delete("/delete/", response_model=schemas.Subject)
 def delete_subject(
         *,
-        id: int,
+        id: str,
         db: Session = Depends(deps.get_db),
         _: models.User = Depends(deps.get_current_active_superuser),
 ):

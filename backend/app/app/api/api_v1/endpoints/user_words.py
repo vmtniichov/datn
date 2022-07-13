@@ -21,44 +21,44 @@ def get_words(
 
 @router.get("/details/", response_model=schemas.UserCustomWord)
 def get_word(
-        id: str, db: Session = Depends(deps.get_db),
+        id: int, db: Session = Depends(deps.get_db),
         _: models.User = Depends(deps.get_current_active_user),
 ):
     word = crud.user_word.get(db, id=id)
     return word
 
 
-@router.post("/", response_model=schemas.UserCustomWordCreate)
+@router.post("/", response_model=schemas.UserCustomWord)
 def create_word(
         *,
         db: Session = Depends(deps.get_db),
-        obj_in: schemas.WordCreate,
+        obj_in: schemas.UserCustomWordCreate,
         _: models.User = Depends(deps.get_current_active_user)
-) -> models.Word:
+):
 
     word = crud.user_word.create(db, obj_in=obj_in)
     return word
 
 
-@router.put("/", response_model=schemas.UserCustomWordCreate)
+@router.put("/", response_model=schemas.UserCustomWord)
 def update_word(
         *,
-        id: str,
+        id: int,
         db: Session = Depends(deps.get_db),
-        obj_in: schemas.WordUpdate,
+        obj_in: schemas.UserCustomWordUpdate,
         _: models.User = Depends(deps.get_current_active_user)
-) -> models.Word:
+):
     db_obj = crud.user_word.get_(db, id=id)
     word = crud.user_word.update(db, db_obj=db_obj, obj_in=obj_in)
     return word
 
 
-@router.delete("/delete/", response_model=schemas.Word)
+@router.delete("/delete/", response_model=schemas.UserCustomWord)
 def delete_word(
         *,
         id: int,
         db: Session = Depends(deps.get_db),
         _: models.User = Depends(deps.get_current_active_user)
-) -> models.Word:
+):
     word = crud.user_word.remove(db, id=id)
     return word
