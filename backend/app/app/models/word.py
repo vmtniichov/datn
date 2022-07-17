@@ -41,3 +41,4 @@ class UserWord(Base):
     position = Column(String)
     source = Column(String)
     note = Column(String)
+    user_id = Column(Integer, ForeignKey("user.id"), nullable=True)

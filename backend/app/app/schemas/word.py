@@ -63,6 +63,7 @@ class UserCustomWordBase(BaseModel):
     position: Optional[str] = None
     frequency: Optional[str] = None
     note: Optional[str] = None
+    user_id: int
 
 class UserCustomWordCreate(UserCustomWordBase):
     pass
